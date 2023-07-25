@@ -1,0 +1,47 @@
+<%= form_with(model: maintenance) do |form| %>
+  <% if maintenance.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(maintenance.errors.count, "error") %> prohibited this maintenance from being saved:</h2>
+
+      <ul>
+        <% maintenance.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :tipo, style: "display: block" %>
+    <%= form.text_field :tipo, class:"form-control" %>
+  </div>
+
+  <div>
+  <div>
+    <select class="form-select mt-2" name="maintenance[equipment_id]" id="maintenances_equipment_id">
+      <option value="-1" selected >Seleccione el equipo</option>
+        <% @equipments.each do |equipment| %>
+          <option value="<%= equipment.id %>"> <%= equipment.id %> - <%= equipment.nombre %> </option>
+        <% end %>
+    </select>
+  </div>
+    <select class="form-select mt-2" name="maintenance[ciudad_id]" id="maintenances_ciudad_id">
+      <option value="-1" selected >Seleccione una ciudad</option>
+        <% @ciudads.each do |ciudad| %>
+          <option value="<%= ciudad.id %>"> <%= ciudad.id %> - <%= ciudad.nombre %> </option>
+        <% end %>
+    </select>
+  </div>
+  <div>
+    <select class="form-select mt-2" name="maintenance[material_id]" id="maintenances_material_id">
+      <option value="-1" selected >Seleccione los materiales</option>
+        <% @materials.each do |material| %>
+          <option value="<%= material.id %>"> <%= material.id %> - <%= material.nombre %> </option>
+        <% end %>
+    </select>
+  </div>
+
+  <div>    
+    <%= form.submit class:"btn btn-secondary mt-2" %>
+  </div>
+<% end %>
